@@ -1,7 +1,6 @@
-
 M.format_stunning = M.format_stunning || {};
 
-// Namespace variables:
+
 M.format_stunning.thesparezeros = "00000000000000000000000000"; // A constant of 26 0's to be used to pad the storage state of the toggles when converting between base 2 and 36, this is to be compact.
 M.format_stunning.togglestate;
 M.format_stunning.courseid;
@@ -9,7 +8,7 @@ M.format_stunning.togglePersistence = 1; // Toggle persistence - 1 = on, 0 = off
 M.format_stunning.ourYUI;
 M.format_stunning.numSections;
 
-// Namespace constants:
+
 M.format_stunning.TOGGLE_6 = 1;
 M.format_stunning.TOGGLE_5 = 2;
 M.format_stunning.TOGGLE_4 = 4;
@@ -20,7 +19,7 @@ M.format_stunning.TOGGLE_1 = 32;
 
 M.format_stunning.init = function(Y, theCourseId, theToggleState, theNumSections, theTogglePersistence, theDefaultTogglePersistence) {
     "use strict";
-    // Init.
+    
     this.ourYUI = Y;
     this.courseid = theCourseId;
     this.togglestate = theToggleState;
@@ -29,10 +28,10 @@ M.format_stunning.init = function(Y, theCourseId, theToggleState, theNumSections
 
     if (this.togglestate !== null) {
         if (this.is_old_preference(this.togglestate) == true) {
-            // Old preference, so convert to new.
+            
             this.convert_to_new_preference();
         }
-        // Check we have enough digits for the number of toggles in case this has increased.
+        
         var numdigits = this.get_required_digits(this.numSections);
         if (numdigits > this.togglestate.length) {
             var dchar;
@@ -45,11 +44,11 @@ M.format_stunning.init = function(Y, theCourseId, theToggleState, theNumSections
                 this.togglestate += dchar;
             }
         } else if (numdigits < this.togglestate.length) {
-            // Shorten to save space.
+        
             this.togglestate = this.togglestate.substring(0, numdigits);
         }
     } else {
-        // Reset to default.
+        
         if (theDefaultTogglePersistence == 0) {
             this.resetState(this.get_min_digit());
         } else {
@@ -62,7 +61,7 @@ M.format_stunning.init = function(Y, theCourseId, theToggleState, theNumSections
 
     Y.delegate('click', this.deleteicon, Y.config.doc, 'ul.icons .delete', this);
 
-    // Event handlers for all opened / closed.
+    
     var allopen = Y.one("#toggles-all-opened");
     if (allopen) {
         allopen.on('click', this.allOpenClick);
@@ -132,13 +131,13 @@ M.format_stunning.toggle_topic = function(targetNode, toggleNum) {
 
 M.format_stunning.to2baseString = function(thirtysix) {
     "use strict";
-    // Break apart the string because integers are signed 32 bit and therefore can only store 31 bits, therefore a 53 bit number will cause overflow / carry with loss of resolution.
+    
     var firstpart = parseInt(thirtysix.substring(0,6),36);
     var secondpart = parseInt(thirtysix.substring(6,12),36);
     var fps = firstpart.toString(2);
     var sps = secondpart.toString(2);
 
-    // Add in preceding 0's if base 2 sub strings are not long enough
+    
     if (fps.length < 26) {
         // Need to PAD.
         fps = this.thesparezeros.substring(0,(26 - fps.length)) + fps;
@@ -159,7 +158,7 @@ M.format_stunning.save_toggles = function() {
     }*/
 };
 
-// New base 64 code:
+
 M.format_stunning.is_old_preference = function(pref) {
     "use strict";
     var retr = false;

@@ -19,35 +19,21 @@ class format_stunning_renderer extends format_section_renderer_base {
     private $togglelib;
     private $isoldtogglepreference = false;
 
-    /**
-     * Constructor method, calls the parent constructor - MDL-21097
-     *
-     * @param moodle_page $page
-     * @param string $target one of rendering target constants
-     */
+
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
 
         $this->togglelib = new stunning_togglelib;
 
-        /* Since format_topcoll_renderer::section_edit_controls() only displays the 'Set current section' control when editing
-           mode is on we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any
-           other managing capability. */
         $page->set_other_editing_capability('moodle/course:setcurrentsection');
     }
 
-    /**
-     * Generate the starting container html for a list of sections
-     * @return string HTML to output.
-     */
+
     protected function start_section_list() {
         return html_writer::start_tag('ul', array('class' => 'ctopics'));
     }
 
-    /**
-     * Generate the starting container html for a list of sections when showing a toggle.
-     * @return string HTML to output.
-     */
+
     protected function start_toggle_section_list() {
         $classes = 'ctopics topics';
         $style = '';
@@ -65,31 +51,16 @@ class format_stunning_renderer extends format_section_renderer_base {
         return html_writer::start_tag('ul', $attributes);
     }
 
-    /**
-     * Generate the closing container html for a list of sections
-     * @return string HTML to output.
-     */
+
     protected function end_section_list() {
         return html_writer::end_tag('ul');
     }
 
-    /**
-     * Generate the title for this section page
-     * @return string the page title
-     */
     protected function page_title() {
         return get_string('sectionname', 'format_stunning');
     }
 
-    /**
-     * Generate the content to displayed on the right part of a section
-     * before course modules are included
-     *
-     * @param stdClass $section The course_section entry from DB
-     * @param stdClass $course The course entry from DB
-     * @param bool $onsectionpage true if being printed on a section page
-     * @return string HTML to output.
-     */
+
     protected function section_right_content($section, $course, $onsectionpage) {
         $o = $this->output->spacer();
 
@@ -126,15 +97,6 @@ class format_stunning_renderer extends format_section_renderer_base {
         return $o;
     }
 
-    /**
-     * Generate the content to displayed on the left part of a section
-     * before course modules are included
-     *
-     * @param stdClass $section The course_section entry from DB
-     * @param stdClass $course The course entry from DB
-     * @param bool $onsectionpage true if being printed on a section page
-     * @return string HTML to output.
-     */
     protected function section_left_content($section, $course, $onsectionpage) {
         $o = $this->output->spacer();
 
@@ -158,14 +120,7 @@ class format_stunning_renderer extends format_section_renderer_base {
         return $o;
     }
 
-    /**
-     * Generate the edit controls of a section
-     *
-     * @param stdClass $course The course entry from DB
-     * @param stdClass $section The course_section entry from DB
-     * @param bool $onsectionpage true if being printed on a section page
-     * @return array of links with edit controls
-     */
+
     protected function section_edit_controls($course, $section, $onsectionpage = false) {
         global $PAGE;
 
@@ -208,14 +163,7 @@ class format_stunning_renderer extends format_section_renderer_base {
         return array_merge($controls, parent::section_edit_controls($course, $section, $onsectionpage));
     }
 
-    /**
-     * Generate a summary of a section for display on the 'course index page'
-     *
-     * @param stdClass $section The course_section entry from DB
-     * @param stdClass $course The course entry from DB
-     * @param array    $mods (argument not used)
-     * @return string HTML to output.
-     */
+
     protected function section_summary($section, $course, $mods) {
         $classattr = 'section main section-summary clearfix';
         $linkclasses = '';
@@ -261,16 +209,7 @@ class format_stunning_renderer extends format_section_renderer_base {
         return $o;
     }
 
-    /**
-     * Generate the display of the header part of a section before
-     * course modules are included
-     *
-     * @param stdClass $section The course_section entry from DB
-     * @param stdClass $course The course entry from DB
-     * @param bool $onsectionpage true if being printed on a section page
-     * @param int $sectionreturn The section to return to after an action
-     * @return string HTML to output.
-     */
+
     protected function section_header($section, $course, $onsectionpage, $sectionreturn = null) {
         $o = '';
         global $PAGE;
@@ -389,11 +328,7 @@ class format_stunning_renderer extends format_section_renderer_base {
         return $o;
     }
 
-    /**
-     * Generate the display of the footer part of a section
-     *
-     * @return string HTML to output.
-     */
+
     protected function section_footer() {
         $o = html_writer::end_tag('div');
         $o .= html_writer::end_tag('li');
@@ -401,11 +336,7 @@ class format_stunning_renderer extends format_section_renderer_base {
     }
 
 
-    /**
-     * Outputs the latest news item.
-     * @global stdClass $OUTPUT Output renderer instance.
-     * @param stdClass $course The course to use.
-     */
+ 
     private function print_noticeboard($course) {
         global $OUTPUT;
 
@@ -556,16 +487,7 @@ class format_stunning_renderer extends format_section_renderer_base {
             echo html_writer::end_tag('div');
     }
 
-    /**
-     * Output the html for a single section page.
-     *
-     * @param stdClass $course The course entry from DB
-     * @param array $sections (argument not used)
-     * @param array $mods (argument not used)
-     * @param array $modnames (argument not used)
-     * @param array $modnamesused (argument not used)
-     * @param int $displaysection The section number in the course which is being displayed
-     */
+
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
         global $PAGE,$USER;
 
@@ -665,15 +587,7 @@ class format_stunning_renderer extends format_section_renderer_base {
         echo html_writer::end_tag('div');
     }
 
-    /**
-     * Output the html for a multiple section page
-     *
-     * @param stdClass $course The course entry from DB
-     * @param array $sections (argument not used)
-     * @param array $mods (argument not used)
-     * @param array $modnames (argument not used)
-     * @param array $modnamesused (argument not used)
-     */
+
     public function print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused) {
         global $PAGE,$USER;
 
@@ -994,10 +908,7 @@ class format_stunning_renderer extends format_section_renderer_base {
         }
     }
 
-    /**
-     * Displays the toggle all fuctionality.
-     * @return string HTML to output.
-     */
+ 
     public function toggle_all() {
         $o = '';
 

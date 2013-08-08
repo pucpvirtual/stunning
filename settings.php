@@ -4,14 +4,6 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    /* Default course display.
-     * Course display default, can be either one of:
-     * COURSE_DISPLAY_SINGLEPAGE or - All sections on one page.
-     * COURSE_DISPLAY_MULTIPAGE     - One section per page.
-     * as defined in moodlelib.php.
-     */
-
-
 
     $name = 'format_stunning/defaultcoursedisplay';
     $title = get_string('defaultcoursedisplay', 'format_stunning');
@@ -36,18 +28,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    /* Layout configuration.
-       Here you can see what numbers in the array represent what layout for setting the default value below.
-       1 => Toggle word, toggle section x and section number - default.
-       2 => Toggle word and section number.
-       3 => Toggle word and toggle section x.
-       4 => Toggle word.
-       5 => Toggle section x and section number.
-       6 => Section number.
-       7 => No additions.
-       8 => Toggle section x.
-       Default layout to use - used when a new Collapsed Topics course is created or an old one is accessed for the first time
-       after installing this functionality introduced in CONTRIB-3378. */
+
     $name = 'format_stunning/defaultlayoutelement';
     $title = get_string('defaultlayoutelement', 'format_stunning');
     $description = get_string('defaultlayoutelement_descpositive', 'format_stunning');
@@ -64,15 +45,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    /* Structure configuration.
-       Here so you can see what numbers in the array represent what structure for setting the default value below.
-       1 => Topic.
-       2 => Week.
-       3 => Latest Week First.
-       4 => Current Topic First.
-       5 => Day.
-       Default structure to use - used when a new Collapsed Topics course is created or an old one is accessed for the first time
-       after installing this functionality introduced in CONTRIB-3378. */
+
     $name = 'format_stunning/defaultlayoutstructure';
     $title = get_string('defaultlayoutstructure', 'format_stunning');
     $description = get_string('defaultlayoutstructure_desc', 'format_stunning');
@@ -134,10 +107,7 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
-    /* Toggle persistence - 1 = on, 0 = off.  You may wish to disable for an AJAX performance increase.
-       Note: If turning persistence off remove any rows containing 'topcoll_toggle_x' in the 'name' field
-             of the 'user_preferences' table in the database.  Where the 'x' in 'topcoll_toggle_x' will be
-             a course id. */
+   
     $name = 'format_stunning/defaulttogglepersistence';
     $title = get_string('defaulttogglepersistence', 'format_stunning');
     $description = get_string('defaulttogglepersistence_desc', 'format_stunning');
@@ -148,8 +118,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Toggle text alignment.
-    // 1 = left, 2 = center and 3 = right - done this way to avoid typos.
+
     $name = 'format_stunning/defaulttogglealignment';
     $title = get_string('defaulttogglealignment', 'format_stunning');
     $description = get_string('defaulttogglealignment_desc', 'format_stunning');
@@ -161,8 +130,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Toggle icon position.
-    // 1 = left and 2 = right - done this way to avoid typos.
+
     $name = 'format_stunning/defaulttoggleiconposition';
     $title = get_string('defaulttoggleiconposition', 'format_stunning');
     $description = get_string('defaulttoggleiconposition_desc', 'format_stunning');
@@ -173,10 +141,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Toggle icon set.
-    // arrow => Arrow icon set.
-    // point => Point icon set.
-    // power => Power icon set.
+
     $name = 'format_stunning/defaulttoggleiconset';
     $title = get_string('defaulttoggleiconset', 'format_stunning');
     $description = get_string('defaulttoggleiconset_desc', 'format_stunning');
@@ -188,9 +153,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Toggle all icon hovers.
-    // 1 => No.
-    // 2 => Yes.
+
     $name = 'format_stunning/defaulttoggleallhover';
     $title = get_string('defaulttoggleallhover', 'format_stunning');
     $description = get_string('defaulttoggleallhover_desc', 'format_stunning');
@@ -201,9 +164,7 @@ if ($ADMIN->fulltree) {
     );
     $settings->add(new admin_setting_configselect($name, $title, $description, $default, $choices));
 
-    // Default Toggle preference for the first time a user accesses a course.
-    // 0 => All closed.
-    // 1 => All open.
+
     $name = 'format_stunning/defaultuserpreference';
     $title = get_string('defaultuserpreference', 'format_stunning');
     $description = get_string('defaultuserpreference_desc', 'format_stunning');

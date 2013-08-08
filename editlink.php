@@ -14,7 +14,7 @@ $item = null;
 
 if(!empty($editid)){
 
-    $sql = "SELECT link, position,name FROM  {format_topcoll_link} WHERE id = ?";
+    $sql = "SELECT link, position,name FROM  {format_stunning_link} WHERE id = ?";
     $params = array('id'=>$editid);
 
     $item = $DB->get_record_sql($sql, $params);

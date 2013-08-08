@@ -26,26 +26,14 @@ class format_stunning extends format_base {
         return true;
     }
 
-    /**
-     * Gets the name for the provided section.
-     *
-     * @param int|stdClass $section Section object from database or just field section.section
-     * @return string The section name.
-     */
+
     public function get_section_name($section) {
         $course = $this->get_course();
         // Don't add additional text as called in creating the navigation.
         return $this->get_stunning_section_name($course, $section, false);
     }
 
-    /**
-     * Gets the name for the provided course, section and state if need to add addional text.
-     *
-     * @param stdClass $course The course entry from DB
-     * @param int|stdClass $section Section object from database or just field section.section
-     * @param boolean $additional State to add additiional text yes = true or no = false.
-     * @return string The section name.
-     */
+
     public function get_stunning_section_name($course, $section, $additional) {
         $thesection = $this->get_section($section);
         if (is_null($thesection)) {
@@ -82,13 +70,7 @@ class format_stunning extends format_base {
             }
         }
 
-        /*
-         * Now done here so that the drag and drop titles will be the correct strings as swapped in format.js.
-         * But only if we are using toggles which will be if all sections are on one page or we are editing the main page
-         * when in one section per page which is coded in 'renderer.php/print_multiple_section_page()' when it calls
-         * 'section_header()' as that gets called from 'format.php' when there is no entry for '$displaysetting' - confused?
-         * I was, took ages to figure.
-         */
+
         if (($additional == true) && ($thesection->section != 0)) {
             switch ($tcsettings['layoutelement']) {
                 case 1:
@@ -124,16 +106,7 @@ class format_stunning extends format_base {
         return $o;
     }
 
-    /**
-     * The URL to use for the specified course (with section)
-     *
-     * @param int|stdClass $section Section object from database or just field course_sections.section
-     *     if omitted the course view page is returned
-     * @param array $options options for view URL. At the moment core uses:
-     *     'navigation' (bool) if true and section has no separate page, the function returns null
-     *     'sr' (int) used by multipage formats to specify to which section to return
-     * @return null|moodle_url
-     */
+
     public function get_view_url($section, $options = array()) {
         $course = $this->get_course();
         $url = new moodle_url('/course/view.php', array('id' => $course->id));
@@ -170,15 +143,7 @@ class format_stunning extends format_base {
         return $url;
     }
 
-    /**
-     * Returns the information about the ajax support in the given source format
-     *
-     * The returned object's property (boolean)capable indicates that
-     * the course format supports Moodle course ajax features.
-     * The property (array)testedbrowsers can be used as a parameter for {@link ajaxenabled()}.
-     *
-     * @return stdClass
-     */
+
     public function supports_ajax() {
         $ajaxsupport = new stdClass();
         $ajaxsupport->capable = true;
@@ -186,13 +151,7 @@ class format_stunning extends format_base {
         return $ajaxsupport;
     }
 
-    /**
-     * Custom action after section has been moved in AJAX mode
-     *
-     * Used in course/rest.php
-     *
-     * @return array This will be passed in ajax respose
-     */
+
     public function ajax_section_move() {
         $titles = array();
         $current = -1;  // MDL-33546.
@@ -215,12 +174,7 @@ class format_stunning extends format_base {
         return array('sectiontitles' => $titles, 'current' => $current, 'action' => 'move');
     }
 
-    /**
-     * Returns the list of blocks to be automatically added for the newly created course
-     *
-     * @return array of default blocks, must contain two keys BLOCK_POS_LEFT and BLOCK_POS_RIGHT
-     *     each of values is an array of block names (for left and right side columns)
-     */
+
     public function get_default_blocks() {
         return array(
             BLOCK_POS_LEFT => array(),
@@ -228,17 +182,7 @@ class format_stunning extends format_base {
         );
     }
 
-    /**
-     * Definitions of the additional options that this course format uses for course
-     *
-     * Collapsed Topics format uses the following options (until extras are migrated):
-     * - coursedisplay
-     * - numsections
-     * - hiddensections
-     *
-     * @param bool $foreditform
-     * @return array of options
-     */
+
     public function course_format_options($foreditform = false) {
         static $courseformatoptions = false;
 
@@ -605,26 +549,9 @@ class format_stunning extends format_base {
         return $elements;
     }
 
-    /**
-     * Updates format options for a course
-     *
-     * In case if course format was changed to 'Collapsed Topics', we try to copy options
-     * 'coursedisplay', 'numsections' and 'hiddensections' from the previous format.
-     * If previous course format did not have 'numsections' option, we populate it with the
-     * current number of sections.  The layout and colour defaults will come from 'course_format_options'.
-     *
-     * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
-     * @param stdClass $oldcourse if this function is called from {@link update_course()}
-     *     this object contains information about the course before update
-     * @return bool whether there were any changes to the options values
-     */
     public function update_course_format_options($data, $oldcourse = null) {
         global $DB; // MDL-37976.
-        /*
-         * Notes: Using 'unset' to really ensure that the reset form elements never get into the database.
-         *        This has to be done here so that the reset occurs after we have done updates such that the
-         *        reset itself is not seen as an update.
-         */
+
         $resetlayout = false;
         $resetcolour = false;
         $resettogglealignment = false;
@@ -701,12 +628,7 @@ class format_stunning extends format_base {
         return $changes;
     }
 
-    /**
-     * Is the section passed in the current section?
-     *
-     * @param stdClass $section The course_section entry from the DB
-     * @return bool true if the section is current
-     */
+
     public function is_section_current($section) {
         $tcsettings = $this->get_settings();
         if (($tcsettings['layoutstructure'] == 2) || ($tcsettings['layoutstructure'] == 3)) {
@@ -732,13 +654,7 @@ class format_stunning extends format_base {
         }
     }
 
-    /**
-     * Return the start and end date of the passed section.
-     *
-     * @param int|stdClass $section The course_section entry from the DB.
-     * @param stdClass $course The course entry from DB.
-     * @return stdClass property start for startdate, property end for enddate.
-     */
+
     private function format_stunning_get_section_dates($section, $course) {
         $oneweekseconds = 604800;
         /* Hack alert. We add 2 hours to avoid possible DST problems. (e.g. we go into daylight
@@ -756,13 +672,7 @@ class format_stunning extends format_base {
         return $dates;
     }
 
-    /**
-     * Return the date of the passed section.
-     *
-     * @param int|stdClass $section The course_section entry from the DB.
-     * @param stdClass $course The course entry from DB.
-     * @return stdClass property date.
-     */
+
     private function format_stunning_get_section_day($section, $course) {
         $onedayseconds = 86400;
         /* Hack alert. We add 2 hours to avoid possible DST problems. (e.g. we go into daylight
@@ -778,14 +688,7 @@ class format_stunning extends format_base {
         return $day;
     }
 
-    /**
-     * Resets the format setting to the default.
-     * @param int $courseid If not 0, then a specific course to reset.
-     * @param int $layout If true, reset the layout to the default in tcconfig.php.
-     * @param int $colour If true, reset the colour to the default in tcconfig.php.
-     * @param int $togglealignment If true, reset the toggle alignment to the default in tcconfig.php.
-     * @param int $toggleiconset If true, reset the toggle icon set to the default in tcconfig.php.
-     */
+
     public function reset_stunning_setting($courseid, $layout, $colour, $togglealignment, $toggleiconset) {
         global $DB, $USER, $COURSE;
 
@@ -835,18 +738,7 @@ class format_stunning extends format_base {
         }
     }
 
-    /**
-     * Restores the course settings when restoring a Moodle 2.3 or below (bar 1.9) course and sets the settings when upgrading
-     * from a prevous version.  Hence no need for 'coursedisplay' as that is a core rather than CT specific setting and not
-     * in the old 'format_topcoll_settings' table.
-     * @param int $courseid If not 0, then a specific course to reset.
-     * @param int $layoutelement The layout element to use, see tcconfig.php.
-     * @param int $layoutstructure The layout structure to use, see tcconfig.php.
-     * @param int $layoutcolumns The layout columns to use, see tcconfig.php.
-     * @param int $tgfgcolour The foreground colour to use, see tcconfig.php.
-     * @param int $tgbgcolour The background colour to use, see tcconfig.php.
-     * @param int $tgbghvrcolour The background hover colour to use, see tcconfig.php.
-     */
+
     public function restore_stunning_setting($courseid, $layoutelement, $layoutstructure, $layoutcolumns, $tgfgcolour, $tgbgcolour, $tgbghvrcolour) {
         $currentcourseid = $this->courseid;  // Save for later - stack data model.
         $this->courseid = $courseid;

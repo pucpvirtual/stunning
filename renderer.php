@@ -818,8 +818,7 @@ class format_stunning_renderer extends format_section_renderer_base {
                 }
 
                 if ($currentsectionfirst == false) {
-                    /* Only need to do this on the iteration when $currentsectionfirst is not true as this iteration will always
-                       happen.  Otherwise you get duplicate entries in course_sections in the DB. */
+
                     unset($sections[$section]);
                 }
                 if (($this->tcsettings['layoutstructure'] != 3) || ($userisediting)) {

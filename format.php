@@ -133,14 +133,14 @@ if (!empty($displaysection)) {
     // Dynamically changing widths with language.
     if ((!$PAGE->user_is_editing()) && ($portable == 0)) {
         echo '.course-content ul.ctopics li.section.main .content, .course-content ul.ctopics li.tcsection .content {';
-        echo 'margin: 0 ' . get_string('topcollsidewidth', 'format_topcoll');
+        echo 'margin: 0 ' . get_string('topcollsidewidth', 'format_stunning');
         echo '}';
     }
 
     // Make room for editing icons.
     if (!$PAGE->user_is_editing()) {
         echo '.course-content ul.ctopics li.section.main .side, .course-content ul.ctopics li.tcsection .side {';
-        echo 'width: ' . get_string('topcollsidewidth', 'format_topcoll');
+        echo 'width: ' . get_string('topcollsidewidth', 'format_stunning');
         echo '}';
     }
 

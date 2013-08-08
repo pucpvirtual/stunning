@@ -1,37 +1,4 @@
-/**
- * Collapsed Topics Information
- *
- * A topic based format that solves the issue of the 'Scroll of Death' when a course has many topics. All topics
- * except zero have a toggle that displays that topic. One or more topics can be displayed at any given time.
- * Toggles are persistent on a per browser session per course basis but can be made to persist longer by a small
- * code change. Full installation instructions, code adaptions and credits are included in the 'Readme.txt' file.
- *
- * @package    course/format
- * @subpackage topcoll
- * @version    See the value of '$plugin->version' in version.php.
- * @copyright  &copy; 2009-onwards G J Barnard in respect to modifications of standard topics format.
- * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
- * @link       http://docs.moodle.org/en/Collapsed_Topics_course_format
- * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
-
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-// Cleaned through use of http://jshint.com/.
-/**
- * @namespace
- */
 M.format_stunning = M.format_stunning || {};
 
 // Namespace variables:
@@ -50,15 +17,7 @@ M.format_stunning.TOGGLE_3 = 8;
 M.format_stunning.TOGGLE_2 = 16;
 M.format_stunning.TOGGLE_1 = 32;
 
-/**
- * Initialise with the information supplied from the course format 'format.php' so we can operate.
- * @param {Object} Y YUI instance
- * @param {String} theCourseId the id of the current course to allow for settings for each course.
- * @param {String} theToggleState the current state of the toggles.
- * @param {Integer} theNumSections the number of sections in the course.
- * @param {Integer} theTogglePersistence Persistence on (1) or off (0).
- * @param {Integer} theDefaultTogglePersistence Persistence all open (1) or all closed (0) when thetogglestate is null.
- */
+
 M.format_stunning.init = function(Y, theCourseId, theToggleState, theNumSections, theTogglePersistence, theDefaultTogglePersistence) {
     "use strict";
     // Init.
@@ -98,10 +57,7 @@ M.format_stunning.init = function(Y, theCourseId, theToggleState, theNumSections
         }
     }
 
-    // Info on http://yuilibrary.com/yui/docs/event/delegation.html
-    // Delegated event handler for the toggles.
-    // Inspiration thanks to Ben Kelada.
-    // Code help thanks to the guru Andrew Nicols.
+
     Y.delegate('click', this.toggleClick, Y.config.doc, 'ul.ctopics .toggle', this);
 
     Y.delegate('click', this.deleteicon, Y.config.doc, 'ul.icons .delete', this);
@@ -155,8 +111,7 @@ M.format_stunning.resetState = function(dchar) {
     }
 };
 
-// Toggle functions
-// Args - targetNode that initiated the call, toggleNum the number of the toggle.
+
 M.format_stunning.toggle_topic = function(targetNode, toggleNum) {
     "use strict";
     var targetLink = targetNode.one('a');
@@ -174,11 +129,7 @@ M.format_stunning.toggle_topic = function(targetNode, toggleNum) {
     this.save_toggles();
 };
 
-// Old maximum number of sections was 52, but as the converstion utilises integers which are 32 bit signed, this must be broken into two string segments for the
-// process to work.  Therefore each 6 character base 36 string will represent 26 characters for part 1 and 27 for part 2 in base 2.
-// This is all required to save cookie space, so instead of using 53 bytes (characters) per course, only 12 are used.
-// Convert from a base 36 string to a base 2 string - effectively a private function.
-// Args - thirtysix - a 12 character string representing a base 36 number.
+
 M.format_stunning.to2baseString = function(thirtysix) {
     "use strict";
     // Break apart the string because integers are signed 32 bit and therefore can only store 31 bits, therefore a 53 bit number will cause overflow / carry with loss of resolution.
@@ -200,8 +151,7 @@ M.format_stunning.to2baseString = function(thirtysix) {
     return fps + sps;
 };
 
-// Save the toggles - called from togglebinary and allToggle.
-// AJAX call to server to save the state of the toggles for this course for the current user if on.
+
 M.format_stunning.save_toggles = function() {
     "use strict";
     /*if (this.togglePersistence == 1) { // Toggle persistence - 1 = on, 0 = off.
@@ -243,11 +193,6 @@ M.format_stunning.convert_to_new_preference = function() {
     this.togglestate += this.encode_value_to_character(value);
 };
 
-/**
- * Sets the state of the requested Toggle number.
- * int togglenum - The toggle number.
- * boolean state - true or false.
- */
 M.format_stunning.set_toggle_state = function(togglenum, state) {
     "use strict";
     var togglecharpos = this.get_toggle_pos(togglenum);

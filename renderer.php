@@ -361,6 +361,9 @@ class format_stunning_renderer extends format_section_renderer_base {
 
             echo html_writer::start_tag('div', array('id' => 'morecourse'));
                 echo html_writer::start_tag('ul',array('class'=>'courses'));
+                    echo html_writer::start_tag('li');
+                        echo html_writer::tag('span','Cursos',array('class'=>'course-label'));
+                    echo html_writer::end_tag('li');
 
                 foreach($links as $l){
                         echo html_writer::start_tag('li');
@@ -512,14 +515,12 @@ class format_stunning_renderer extends format_section_renderer_base {
 
         //*****************LINKS*************//
         $this->print_menu_acitivity($course);
-        
+        $this->print_othercourse($course);
         /*** USER PROFILE**/
         $this->print_profile_block();
         echo html_writer::tag('div','',array('class'=>'clearfix'));
         $this->print_banner($course);
         $this->print_noticeboard($course);
-
-        $this->print_othercourse($course);
 
         // Copy activity clipboard..
         echo $this->course_activity_clipboard($course, $displaysection);
@@ -615,7 +616,7 @@ class format_stunning_renderer extends format_section_renderer_base {
 
         //*****************LINKS*************//
         $this->print_menu_acitivity($course);
-
+        $this->print_othercourse($course);
         /*** USER PROFILE**/
         $this->print_profile_block();
         echo html_writer::tag('div','',array('class'=>'clearfix'));
@@ -632,7 +633,7 @@ class format_stunning_renderer extends format_section_renderer_base {
             echo $this->courserenderer->course_section_add_cm_control($course, $thissection->section, 0);
             echo $this->section_footer();
             $this->print_noticeboard($course);
-            $this->print_othercourse($course);
+          
         }
 
         if ($course->numsections > 0) {

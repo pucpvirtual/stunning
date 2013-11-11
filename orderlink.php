@@ -37,7 +37,7 @@ if ($mform->is_cancelled()) {
 		$record = new stdClass();
 		$record->id= $id;
 		$record->position =$formdata->order[$id];
-		if(empty($name)) $record->name = $name;
+		if(!empty($name)) $record->name = $name;
 		$DB->update_record('format_stunning_link',$record);
 	}
 

@@ -519,8 +519,9 @@ class format_stunning_renderer extends format_section_renderer_base {
         //*****************LINKS*************//
         $this->print_menu_acitivity($course);
         echo html_writer::tag('div','',array('class'=>'clearfix'));
-        $this->print_banner($course);
+        
         $this->print_othercourse($course);
+        $this->print_banner($course);
         /*** USER PROFILE**/
         $this->print_profile_block();
 

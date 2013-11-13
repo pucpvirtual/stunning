@@ -361,9 +361,12 @@ class format_stunning_renderer extends format_section_renderer_base {
 
             echo html_writer::start_tag('div', array('id' => 'morecourse'));
                 echo html_writer::start_tag('ul',array('class'=>'courses'));
+                if(count($links)!= 0){
                     echo html_writer::start_tag('li');
-                        echo html_writer::tag('span','Cursos',array('class'=>'course-label'));
-                    echo html_writer::end_tag('li');
+                        echo html_writer::tag('a','Cursos:',array('class'=>'course-label'));
+                    echo html_writer::end_tag('li');                    
+                }
+
 
                 foreach($links as $l){
                         echo html_writer::start_tag('li');

@@ -310,7 +310,8 @@ div.inner-profiel-block{
 
 .forumpost .row.side{display: none;}
 
-#morecourse ul.courses li{float: left;margin:0px 10px;}
+#morecourse ul.courses {text-align: center;}
+#morecourse ul.courses li{display:inline-block; margin:0px 1px;}
 
 /*The graphic Design about the Format Course*/
 ul li{
@@ -348,12 +349,30 @@ div#shadebox.w-profile #shadebox_content,
 }
 
 /*More Courses*/
+#morecourse .courses li {
+    margin: 0 1px 10px;
+}
 #morecourse .courses li a{
     display: inline-block;
     background-color: #DDDDDD;
-    padding: 0.5em;
-    margin: 0 0.3em 10px;
+    padding: 0.5em 1.5em;
+    margin: 0 1px 10px;
+    font-weight: bold;
 }
 #morecourse .courses li a:hover{
     background-color: #ededed;
+}
+
+/*Tamaño de iconos*/
+#page-course-view-stunning #shadebox_content .icons{
+    text-align: center;
+}
+
+#page-course-view-stunning #shadebox_content .icons li a img {
+    max-width: 100px!important;
+}
+
+#page-course-view-stunning #shadebox_content .icons li:hover {
+    background-color: #f1f2f2;
+    color: #333;
 }

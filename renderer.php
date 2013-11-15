@@ -463,7 +463,7 @@ class format_stunning_renderer extends format_section_renderer_base {
                 echo html_writer::empty_tag('img',array('src'=>$pictururl));
             echo html_writer::end_tag('div');
             echo html_writer::start_tag('div');
-                echo $USER->firstname .' '. $USER->lastname;
+                echo $USER->firstname;
             echo html_writer::end_tag('div');
         echo html_writer::end_tag('div');
     }
@@ -517,13 +517,15 @@ class format_stunning_renderer extends format_section_renderer_base {
         }
 
         //*****************LINKS*************//
-        $this->print_menu_acitivity($course);
+       
         echo html_writer::tag('div','',array('class'=>'clearfix'));
         $this->print_banner($course);
         $this->print_othercourse($course);
-      
-        /*** USER PROFILE**/
+
+        echo html_writer::tag('div','',array('class'=>'acitivity_profile'));
+        $this->print_menu_acitivity($course);
         $this->print_profile_block();
+        echo html_writer::end_tag('div');
 
         $this->print_noticeboard($course);
 
@@ -620,11 +622,16 @@ class format_stunning_renderer extends format_section_renderer_base {
 
 
         //*****************LINKS*************//
-        $this->print_menu_acitivity($course);
-        $this->print_profile_block();
+        
         echo html_writer::tag('div','',array('class'=>'clearfix'));
         $this->print_banner($course);
         $this->print_othercourse($course);
+
+        
+        echo html_writer::start_tag('div',array('id'=>'acitivity_profile'));
+        $this->print_menu_acitivity($course);
+        $this->print_profile_block();
+        echo html_writer::end_tag('div');
         /*** USER PROFILE**/
 
         

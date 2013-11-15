@@ -297,15 +297,18 @@ body.jsenabled #toggle-all {
     text-decoration: none;
 }
 
+div#acitivity_profile {
+text-align: center;
+}
 
 div#shadebox.w-profile{
-    float: left;
-    width: 65%;
+    display: inline-block;
 }
 
 div.inner-profiel-block{
-    float:right;
     margin: 0 0% 10px 0;
+    background: #f7f6f1;
+    padding: 2px;
 }
 
 .forumpost .row.side{display: none;}
@@ -325,8 +328,8 @@ div#shadebox.w-profile #shadebox_content,
 #shadebox_content .icons li{
     display: inline-block;
     vertical-align: top;
-    padding: 1em;
-    margin: 0.5em;
+    padding: .2em;
+    margin: 0;
 }
 #shadebox_content .icons li a{
     padding: 0.2em;
@@ -344,8 +347,7 @@ div#shadebox.w-profile #shadebox_content,
 .inner-profiel-block div{
     text-align: center;
     font-size: 12px;
-    font-weight: bold;
-    padding: 10px 0;
+    padding: 2px;
 }
 
 /*More Courses*/
